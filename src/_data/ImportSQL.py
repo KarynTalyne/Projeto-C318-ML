@@ -12,7 +12,6 @@ def GetData():
     pd.set_option('display.expand_frame_repr', False)
     dbConnection.close()
 
-
     a = (Data.drop(columns=['id'])).copy()
     a = (a.drop(columns=['class'])).copy()
     data_x = np.array(a.to_numpy()).reshape(-1,9)
