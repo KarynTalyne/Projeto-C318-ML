@@ -95,6 +95,8 @@ def main():
                 print(b," -> NO\n")
             elif b==2:
                 print(b," -> YES")
+        print("\n\n")        
+        prt.evaluate_model()
         
         
 
