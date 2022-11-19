@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 
 def GetData():
     #coloque o valor do root no lugar de ****
-    sqlEngine = create_engine('mysql+pymysql://root:/MS-DOSV.6.22b@127.0.0.1', pool_recycle=3600)
+    sqlEngine = create_engine('mysql+pymysql://root:****@127.0.0.1', pool_recycle=3600)
     dbConnection = sqlEngine.connect()
     Data = pd.read_sql("SELECT * FROM ag002.`breast-cancer`", dbConnection);
     pd.set_option('display.expand_frame_repr', False)
