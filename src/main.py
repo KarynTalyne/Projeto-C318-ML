@@ -1,6 +1,6 @@
 from _perceptron import model_perceptron as perceptron
 import numpy as np
-
+from _screen import Screen
 
 def main():
     flag = int(input(">> Hi!Would you like to classify arbitrary data? If yes, input 0 ; if not, input 2\n"))
@@ -101,4 +101,7 @@ def main():
         
 
 if __name__ == '__main__': 
-    main() 
+    Tela = Screen.Screen()
+    Tela.initial_screen()
+    
+    # main() 
