@@ -12,6 +12,32 @@ class Screen:
         self.x_aux = []
         self.y = []
 
+    def evaluate_model_screen(self, list_evaluate_model):
+        sg.theme('DarkBlue')
+
+        evaluate = [
+            [sg.Text(f'Accuracy score: {list_evaluate_model[0]}')],
+            [sg.Text(f'Error rate: {list_evaluate_model[1]}')],
+            [sg.Text(f'Zero One loss: {list_evaluate_model[2]}')],
+            [sg.Text(f'F1 scores:')],
+            [sg.Text(f'average macro: {list_evaluate_model[3]}')],
+            [sg.Text(f'average weighted: {list_evaluate_model[4]}')],
+            [sg.Text(f'average micro: {list_evaluate_model[5]}')],
+            [sg.Text(f'average binary: {list_evaluate_model[6]}')],
+            [sg.Text(f'Roc auc score: {list_evaluate_model[7]}')],
+            [sg.Text(f'Precision score: {list_evaluate_model[8]}')],
+            [sg.Text(f'Recall score: {list_evaluate_model[9]}')],
+            [sg.Text(f'Jaccard score: {list_evaluate_model[10]}')],
+            [sg.Text(f'Hamming loss score: {list_evaluate_model[12]}')],
+            [sg.Text(f'Max error: {list_evaluate_model[13]}')],
+            [sg.Text(f'Matthews correlation coefficient: {list_evaluate_model[14]}')],
+            [sg.Text(f'Matrix confusion:')],
+            [sg.Text(list_evaluate_model[11])]
+        ]
+
+        retrun_evaluate = [[sg.Frame('Model Ealuation Metrics', layout=evaluate, key='container_model_ealuation_metrics')]], 
+
+        return sg.Window('Model Ealuation Metrics', layout=retrun_evaluate, finalize=True)
     
     def initial_screen(self):
         sg.theme('DarkBlue')
@@ -199,23 +225,12 @@ class Screen:
 
                 if checkX == True and checkY == True:
                     data_x = np.array(self.x_aux).reshape(-1,9)
-                    data_y = np.array(self.y)
-
 
                     prt = perceptron.model_perceptron()
                     model = prt.get_model()
                     pred = model.predict(data_x)
 
-                    tkinter.messagebox.showinfo(title="Based on the data, there is a recurrence of the disease", message=f'Result: {pred.reshape(-1,1)}')
-                    # Obs: Nessa parte preferi deixar a apresentação via terminal, pois a quandidade de iterações são grandes e na interface acredito que não fica legal
-                    for b in pred:
-                        if b==1:
-
-                            print(b," -> NO\n")
-                        elif b==2:
-                            print(b," -> YES")
-                    print("\n\n")        
-                    prt.evaluate_model()
+                    self.evaluate_model_screen(prt.evaluate_model())
                 else:
                     tkinter.messagebox.showerror(title="WRONG INPUT!", message="Enter a value in field")
 

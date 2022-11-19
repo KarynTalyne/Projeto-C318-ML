@@ -86,11 +86,11 @@ class model_perceptron:
         c_matrix = confusion_matrix(self.y_teste, y_pred, labels=self.model.classes_)
         disp = ConfusionMatrixDisplay(confusion_matrix=c_matrix, display_labels=self.model.classes_)
         disp.plot()
-        plt.savefig('src/resources/confusion_matrix.png', format='png')
-        #plt.show()
+        #plt.savefig('src/resources/confusion_matrix1.png', format='png')
+        plt.show()
 
         # Printing metrics
-        
+        '''
         print("\n-------------------------------------------------------------------------------------------------")
         print("                                      MODEL EVALUATION METRICS")
         print("-------------------------------------------------------------------------------------------------")
@@ -110,5 +110,9 @@ class model_perceptron:
         print("\n - Hamming loss score: ", round(h_loss, 2))
         print("\n - Max error: ", round(M_error, 2))
         print("\n - Matthews correlation coefficient: ", round(m_coef, 2))
-        print("-------------------------------------------------------------------------------------------------\n")
+        print("-------------------------------------------------------------------------------------------------\n") '''
+
+        return [round(accuracy, 2), round(error_rate, 2), round(zero_one_loss_value, 2), round(f1_macro, 2), round(f1_weighted, 2),
+        round(f1_micro, 2), round(f1_binary, 2), round(roc_auc_score_value, 2), round(Precision, 2), round(r_score, 2), round(J_score, 2), 
+        c_matrix, round(h_loss, 2), round(M_error, 2), round(m_coef, 2)]
         
