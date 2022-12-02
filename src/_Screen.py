@@ -8,9 +8,7 @@ class Screen:
         self.flag = 2
         self.flag2 = 0
         self.cont = 0
-        self.x = []
         self.x_aux = []
-        self.y = []
 
     def evaluate_model_screen(self, list_evaluate_model, title, resp):
         sg.theme('DarkBlue')
