@@ -92,9 +92,9 @@ def main():
         for b in pred:
             if b==1:
 
-                print(b," -> NO\n")
+                print(b," Aswer -> NO\n")
             elif b==2:
-                print(b," -> YES")
+                print(b," Aswer -> YES")
         print("\n\n")        
         prt.evaluate_model()
         

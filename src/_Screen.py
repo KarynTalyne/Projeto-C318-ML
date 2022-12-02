@@ -12,32 +12,40 @@ class Screen:
         self.x_aux = []
         self.y = []
 
-    def evaluate_model_screen(self, list_evaluate_model):
+    def evaluate_model_screen(self, list_evaluate_model, title, resp):
         sg.theme('DarkBlue')
-
+    
         evaluate = [
-            [sg.Text(f'Accuracy score: {list_evaluate_model[0]}')],
-            [sg.Text(f'Error rate: {list_evaluate_model[1]}')],
-            [sg.Text(f'Zero One loss: {list_evaluate_model[2]}')],
-            [sg.Text(f'F1 scores:')],
-            [sg.Text(f'average macro: {list_evaluate_model[3]}')],
-            [sg.Text(f'average weighted: {list_evaluate_model[4]}')],
-            [sg.Text(f'average micro: {list_evaluate_model[5]}')],
-            [sg.Text(f'average binary: {list_evaluate_model[6]}')],
-            [sg.Text(f'Roc auc score: {list_evaluate_model[7]}')],
-            [sg.Text(f'Precision score: {list_evaluate_model[8]}')],
-            [sg.Text(f'Recall score: {list_evaluate_model[9]}')],
-            [sg.Text(f'Jaccard score: {list_evaluate_model[10]}')],
-            [sg.Text(f'Hamming loss score: {list_evaluate_model[12]}')],
-            [sg.Text(f'Max error: {list_evaluate_model[13]}')],
-            [sg.Text(f'Matthews correlation coefficient: {list_evaluate_model[14]}')],
-            [sg.Text(f'Matrix confusion:')],
+            [sg.Text('')],
+            [sg.Text(title)],
+            [sg.Text(resp)],
+            [sg.Text('')],
+            [sg.Text('------------------------------------------------------------------------------------------')],
+            [sg.Text('                            Model Evaluation Metrics')],
+            [sg.Text('------------------------------------------------------------------------------------------')],
+            [sg.Text('')],
+            [sg.Text(f'- Accuracy score: {list_evaluate_model[0]}')],
+            [sg.Text(f'- Error rate: {list_evaluate_model[1]}')],
+            [sg.Text(f'- Zero One loss: {list_evaluate_model[2]}')],
+            [sg.Text(f'- F1 scores:')],
+            [sg.Text(f'- average macro: {list_evaluate_model[3]}')],
+            [sg.Text(f'- average weighted: {list_evaluate_model[4]}')],
+            [sg.Text(f'- average micro: {list_evaluate_model[5]}')],
+            [sg.Text(f'- average binary: {list_evaluate_model[6]}')],
+            [sg.Text(f'- Roc auc score: {list_evaluate_model[7]}')],
+            [sg.Text(f'- Precision score: {list_evaluate_model[8]}')],
+            [sg.Text(f'- Recall score: {list_evaluate_model[9]}')],
+            [sg.Text(f'- Jaccard score: {list_evaluate_model[10]}')],
+            [sg.Text(f'- Hamming loss score: {list_evaluate_model[12]}')],
+            [sg.Text(f'- Max error: {list_evaluate_model[13]}')],
+            [sg.Text(f'- Matthews correlation coefficient: {list_evaluate_model[14]}')],
+            [sg.Text(f'- Matrix confusion:')],
             [sg.Text(list_evaluate_model[11])]
         ]
 
-        retrun_evaluate = [[sg.Frame('Model Ealuation Metrics', layout=evaluate, key='container_model_ealuation_metrics')]], 
+        retrun_evaluate = [[sg.Frame('Analysis Output', layout=evaluate, key='container_model_ealuation_metrics')]], 
 
-        return sg.Window('Model Ealuation Metrics', layout=retrun_evaluate, finalize=True)
+        return sg.Window('Analysis Output', layout=retrun_evaluate, finalize=True)
     
     def initial_screen(self):
         sg.theme('DarkBlue')
@@ -229,8 +237,15 @@ class Screen:
                     prt = perceptron()
                     model = prt.get_model()
                     pred = model.predict(data_x)
-
-                    self.evaluate_model_screen(prt.evaluate_model())
+                    #result = pred.reshape(-1,1)
+                    title = '       >> Based on the analysis made by the model:'
+                    resp = None
+                    for b in pred:
+                        if b==1:
+                            resp = "    No, there is no great chance of recurrence of the disease."
+                        elif b==2:
+                            resp = "    Yes, there is a high chance of recurrence of the disease."
+                    self.evaluate_model_screen(prt.evaluate_model(), title, resp)
                 else:
                     tkinter.messagebox.showerror(title="WRONG INPUT!", message="Enter a value in field")
 
