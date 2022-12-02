@@ -71,22 +71,23 @@ class Screen:
             [sg.Text('Input node_caps (discrete values in the range 1 to 2):')],
             [sg.Input(key='node_caps')],
 
-            [sg.Text('Input breast (discrete values in the range 1 to 2):')],
-            [sg.Input(key='breast')],
+            [sg.Text('Input deg_malig (discrete values in the range 1 to 3):')],
+            [sg.Input(key='deg_malig')],
+
         ]
         
         configuration2 = [
+            
+            [sg.Text('Input breast (discrete values in the range 1 to 2):')],
+            [sg.Input(key='breast')],
+
             [sg.Text('Input breast_quad (discrete values in the range 1 to 5):')],
             [sg.Input(key='breast_quad')],
 
             [sg.Text('Input irradiat (discrete values in the range 1 to 2):')],
             [sg.Input(key='irradiat')],
 
-            [sg.Text('Input class (discrete values in the range 1 to 2):')],
-            [sg.Input(key='class_')],
-
-            [sg.Text('Input deg_malig (discrete values in the range 1 to 3):')],
-            [sg.Input(key='deg_malig')],
+            
 
             [sg.Text('')],
 
@@ -115,7 +116,6 @@ class Screen:
                 self.cont = self.cont + 1
                 
                 checkX = False
-                checkY = False
 
                 if values['age'] == '':
                     tkinter.messagebox.showerror(title="WRONG INPUT!", message="Enter a value between 1 and 9")
@@ -218,26 +218,14 @@ class Screen:
                         checkX = True
 
                 if checkX == True:
-                    self.x.append(self.x_aux)
-                
-                if values['class_'] == '':
-                    tkinter.messagebox.showerror(title="WRONG INPUT!", message="Enter a value between 1 and 2")
-                    checkY = False
-                else:
-                    class_ = int(values['class_'])
-                    if (class_ < 1 or class_ > 2):
-                        tkinter.messagebox.showerror(title="WRONG INPUT!", message="Enter a value between 1 and 2")
-                    else:
-                        self.y.append(class_)
-                        checkY = True
-
-                if checkX == True and checkY == True:
-                    data_x = np.array(self.x_aux).reshape(-1,9)
+                    aux_x = (np.array(self.x_aux).reshape(-1,9))
+                    data_x = aux_x
+                    print("data_x -> ", data_x)
 
                     prt = perceptron()
                     model = prt.get_model()
                     pred = model.predict(data_x)
-                    #result = pred.reshape(-1,1)
+                    print("pred result -> ", pred)
                     title = '       >> Based on the analysis made by the model:'
                     resp = None
                     for b in pred:

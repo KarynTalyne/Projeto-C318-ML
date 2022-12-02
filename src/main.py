@@ -3,6 +3,8 @@ import numpy as np
 from _Screen import Screen
 
 def main():
+    print("start...")
+    '''
     flag = int(input(">> Hi!Would you like to classify arbitrary data? If yes, input 0 ; if not, input 2\n"))
     flag2 = 0
     cont = 0
@@ -69,12 +71,6 @@ def main():
 
         x.append(x_aux)
 
-        class_ = int(input("Input class (discrete values in the range 1 to 2):\n"))
-        if (class_ < 1 or class_ > 2):
-            print("WRONG INPUT! RESTART!")
-            break
-        y.append(class_)
-
         flag = int(input("Predict now? if yes, input 1; if not, input 0\n"))
         print("\n\n")
         if(flag==1):
@@ -97,6 +93,7 @@ def main():
                 print(b," Aswer -> YES")
         print("\n\n")        
         prt.evaluate_model()
+    '''
         
         
 

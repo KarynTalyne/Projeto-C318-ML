@@ -31,6 +31,8 @@ import numpy as np
 from _Screen import Screen
 
 def main():
+    print(&#34;start...&#34;)
+    &#39;&#39;&#39;
     flag = int(input(&#34;&gt;&gt; Hi!Would you like to classify arbitrary data? If yes, input 0 ; if not, input 2\n&#34;))
     flag2 = 0
     cont = 0
@@ -97,12 +99,6 @@ def main():
 
         x.append(x_aux)
 
-        class_ = int(input(&#34;Input class (discrete values in the range 1 to 2):\n&#34;))
-        if (class_ &lt; 1 or class_ &gt; 2):
-            print(&#34;WRONG INPUT! RESTART!&#34;)
-            break
-        y.append(class_)
-
         flag = int(input(&#34;Predict now? if yes, input 1; if not, input 0\n&#34;))
         print(&#34;\n\n&#34;)
         if(flag==1):
@@ -120,11 +116,12 @@ def main():
         for b in pred:
             if b==1:
 
-                print(b,&#34; -&gt; NO\n&#34;)
+                print(b,&#34; Aswer -&gt; NO\n&#34;)
             elif b==2:
-                print(b,&#34; -&gt; YES&#34;)
+                print(b,&#34; Aswer -&gt; YES&#34;)
         print(&#34;\n\n&#34;)        
         prt.evaluate_model()
+    &#39;&#39;&#39;
         
         
 
@@ -152,6 +149,8 @@ if __name__ == &#39;__main__&#39;:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def main():
+    print(&#34;start...&#34;)
+    &#39;&#39;&#39;
     flag = int(input(&#34;&gt;&gt; Hi!Would you like to classify arbitrary data? If yes, input 0 ; if not, input 2\n&#34;))
     flag2 = 0
     cont = 0
@@ -218,12 +217,6 @@ if __name__ == &#39;__main__&#39;:
 
         x.append(x_aux)
 
-        class_ = int(input(&#34;Input class (discrete values in the range 1 to 2):\n&#34;))
-        if (class_ &lt; 1 or class_ &gt; 2):
-            print(&#34;WRONG INPUT! RESTART!&#34;)
-            break
-        y.append(class_)
-
         flag = int(input(&#34;Predict now? if yes, input 1; if not, input 0\n&#34;))
         print(&#34;\n\n&#34;)
         if(flag==1):
@@ -241,11 +234,12 @@ if __name__ == &#39;__main__&#39;:
         for b in pred:
             if b==1:
 
-                print(b,&#34; -&gt; NO\n&#34;)
+                print(b,&#34; Aswer -&gt; NO\n&#34;)
             elif b==2:
-                print(b,&#34; -&gt; YES&#34;)
+                print(b,&#34; Aswer -&gt; YES&#34;)
         print(&#34;\n\n&#34;)        
-        prt.evaluate_model()</code></pre>
+        prt.evaluate_model()
+    &#39;&#39;&#39;</code></pre>
 </details>
 </dd>
 </dl>

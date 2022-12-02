@@ -33,8 +33,7 @@ class model_perceptron:
         a = (Data.drop(columns=['id'])).copy()
         a = (a.drop(columns=['class'])).copy()
         data_x = np.array(a.to_numpy()).reshape(-1,9)
-
-
+    
         a2 = Data['class'].copy()
         a2.to_frame()
         data_y = np.array(a2.to_numpy())
@@ -47,7 +46,7 @@ class model_perceptron:
     def get_model(self):
         
         self.x_treino, self.x_teste, self.y_treino, self.y_teste = self.GetData()
-        self.model = MLPClassifier(max_iter=10000, tol=1e-3, random_state=1)
+        self.model = MLPClassifier(hidden_layer_sizes= (100,1000), max_iter=70000, tol=1e-5, random_state=1)
         self.model.fit(self.x_treino, self.y_treino)
 
         return self.model
