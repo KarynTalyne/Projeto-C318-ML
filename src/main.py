@@ -1,6 +1,6 @@
-from _perceptron import model_perceptron as perceptron
+from model_perceptron import model_perceptron as perceptron
 import numpy as np
-from _screen import Screen
+from _Screen import Screen
 
 def main():
     flag = int(input(">> Hi!Would you like to classify arbitrary data? If yes, input 0 ; if not, input 2\n"))
@@ -101,7 +101,7 @@ def main():
         
 
 if __name__ == '__main__': 
-    Tela = Screen.Screen()
+    Tela = Screen()
     Tela.initial_screen()
     
     # main() 

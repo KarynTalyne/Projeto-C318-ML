@@ -1,6 +1,8 @@
+import pandas as pd
 import numpy as np
+from sqlalchemy import create_engine
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-from _data import ImportSQL
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
@@ -19,10 +21,32 @@ class model_perceptron:
     
     def __init__(self):
         None
-        
+    
+    def GetData(self):
+        #coloque o valor do root no lugar de ****
+        sqlEngine = create_engine('mysql+pymysql://root:****@127.0.0.1', pool_recycle=3600)
+        dbConnection = sqlEngine.connect()
+        Data = pd.read_sql("SELECT * FROM ag002.`breast-cancer`", dbConnection);
+        pd.set_option('display.expand_frame_repr', False)
+        dbConnection.close()
+
+        a = (Data.drop(columns=['id'])).copy()
+        a = (a.drop(columns=['class'])).copy()
+        data_x = np.array(a.to_numpy()).reshape(-1,9)
+
+
+        a2 = Data['class'].copy()
+        a2.to_frame()
+        data_y = np.array(a2.to_numpy())
+
+        x_treino, x_teste, y_treino, y_teste = train_test_split(data_x, data_y, test_size=0.20)
+        #print(f"Quantidade de dados para treino: {len(x_treino)}")
+        #print(f"Quantidade de dados para teste(avaliação): {len(x_teste)}")
+        return x_treino,x_teste,y_treino,y_teste
+
     def get_model(self):
         
-        self.x_treino, self.x_teste, self.y_treino, self.y_teste = ImportSQL.GetData()
+        self.x_treino, self.x_teste, self.y_treino, self.y_teste = self.GetData()
         self.model = MLPClassifier(max_iter=10000, tol=1e-3, random_state=1)
         self.model.fit(self.x_treino, self.y_treino)
 
@@ -86,7 +110,7 @@ class model_perceptron:
         c_matrix = confusion_matrix(self.y_teste, y_pred, labels=self.model.classes_)
         disp = ConfusionMatrixDisplay(confusion_matrix=c_matrix, display_labels=self.model.classes_)
         disp.plot()
-        #plt.savefig('src/resources/confusion_matrix1.png', format='png')
+        plt.savefig('resources/confusion_matrix.png', format='png')
         plt.show()
 
         # Printing metrics

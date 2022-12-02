@@ -1,6 +1,6 @@
 import tkinter
 import PySimpleGUI as sg
-from _perceptron import model_perceptron as perceptron
+from model_perceptron import model_perceptron as perceptron
 import numpy as np
 
 class Screen:
@@ -226,7 +226,7 @@ class Screen:
                 if checkX == True and checkY == True:
                     data_x = np.array(self.x_aux).reshape(-1,9)
 
-                    prt = perceptron.model_perceptron()
+                    prt = perceptron()
                     model = prt.get_model()
                     pred = model.predict(data_x)
 
